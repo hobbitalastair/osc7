@@ -8,11 +8,9 @@ ESC ] 7 ; file://<hostname><encoded-path> BEL
 
 Terminals may use this sequence to update their current working directory. That lets tools which inspect the terminal process, such as launchers or file-open helpers, easily find the shell's current directory.
 
-## Why this exists
+Correct URI path escaping is awkward in shell. This helper keeps prompt integration small and efficient.
 
-Correct URI path escaping is awkward in shell. This helper keeps prompt integration small and avoids running Python or a larger prompt framework on every prompt redraw.
-
-The hostname is emitted as the URI host. The directory path is encoded as a URI path, so `/` remains `/`, spaces become `%20`, and bytes such as `%`, `?`, `#`, and control characters are escaped.
+The local hostname is emitted as the URI host. The directory path is encoded as a URI path, so `/` remains `/`, spaces become `%20`, and bytes such as `%`, `?`, `#`, and control characters are escaped.
 
 ## Build
 
@@ -30,7 +28,7 @@ Bash:
 PROMPT_COMMAND='osc7'
 ```
 
-Zsh:
+Zsh (untested):
 
 ```sh
 precmd() { osc7 }
